@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <defs>
+    <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#262018"/>
+      <stop offset="1" stop-color="#111111"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#g2)"/>
+  <path d="M150 330c40-90 110-140 180-130 80 12 130 80 140 160" fill="none" stroke="#d7d0c2" stroke-width="26" stroke-linecap="round"/>
+  <path d="M170 390c70-40 150-40 260 0" fill="none" stroke="#c9a227" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="300" cy="210" r="64" fill="none" stroke="#c9a227" stroke-width="4" opacity=".7"/>
+  <text x="300" y="555" text-anchor="middle" font-family="Georgia, serif" font-size="30" letter-spacing="6" fill="#c9a227">BARBA</text>
+</svg>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Acceso administrativo | Barbería Don Filo</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="csrf-token" content="{{csrfToken}}">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="auth-page">
+  <main class="auth-shell">
+    <section class="auth-brand">
+      <a class="brand brand--auth" href="/">
+        <span class="brand__mark">DF</span>
+        <span class="brand__text">
+          <strong>Barbería Don Filo</strong>
+          <small>Panel administrativo</small>
+        </span>
+      </a>
+      <div class="auth-brand__copy">
+        <p class="eyebrow">Oficio y agenda</p>
+        <h1>Todo tu día, en una sola pantalla.</h1>
+        <p>Gestiona citas, barberos, servicios y horarios desde un panel claro, rápido y hecho para el mostrador.</p>
+      </div>
+      <ul class="auth-brand__list">
+        <li>Agenda diaria y semanal</li>
+        <li>Estados y pagos de cada cita</li>
+        <li>Bloqueos y disponibilidad en tiempo real</li>
+      </ul>
+    </section>
+
+    <section class="auth-card">
+      <div class="auth-card__inner">
+        <p class="eyebrow">Bienvenido</p>
+        <h2>Inicia sesión</h2>
+        <p class="auth-card__lead">Usa el usuario y la contraseña que te entregó el administrador.</p>
+
+        <form id="login-form" class="form" data-next="{{next}}" novalidate>
+          <div class="form__error" id="login-error" role="alert" hidden></div>
+
+          <label class="field">
+            <span>Usuario</span>
+            <input type="text" name="username" autocomplete="username" required minlength="3" maxlength="60" autofocus>
+          </label>
+
+          <label class="field">
+            <span>Contraseña</span>
+            <div class="password-field">
+              <input type="password" name="password" autocomplete="current-password" required minlength="8" maxlength="128">
+              <button type="button" class="password-toggle" data-password-toggle aria-label="Mostrar contraseña">Ver</button>
+            </div>
+          </label>
+
+          <button class="btn btn--large btn--block" type="submit" id="login-submit">Entrar al panel</button>
+        </form>
+
+        <p class="auth-card__help">¿Olvidaste tu contraseña? Pídele al administrador que restablezca tu acceso.</p>
+        <a class="text-link" href="/">← Volver al sitio público</a>
+      </div>
+      <footer class="auth-footer">© {{year}} Barbería Don Filo</footer>
+    </section>
+  </main>
+
+  <script src="/js/api.js" defer></script>
+  <script src="/js/login.js" defer></script>
+</body>
+</html>

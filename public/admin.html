@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel administrativo | Barbería Don Filo</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="admin-body">
+  <div class="admin-sidebar__backdrop" id="admin-backdrop"></div>
+  <div class="admin-shell">
+    <aside class="admin-sidebar" id="admin-sidebar">
+      <a class="brand" href="/" aria-label="Barbería Don Filo">
+        <span class="brand__mark">DF</span>
+        <span class="brand__text">
+          <strong>Barbería Don Filo</strong>
+          <small>Panel administrativo</small>
+        </span>
+      </a>
+
+      <nav class="admin-nav" aria-label="Secciones del panel">
+        <button type="button" data-section="dashboard" class="is-active"><span class="admin-nav__icon">01</span>Resumen</button>
+        <button type="button" data-section="appointments"><span class="admin-nav__icon">02</span>Citas</button>
+        <button type="button" data-section="calendar"><span class="admin-nav__icon">03</span>Calendario</button>
+        <button type="button" data-section="barbers" data-admin-only><span class="admin-nav__icon">04</span>Barberos</button>
+        <button type="button" data-section="services" data-admin-only><span class="admin-nav__icon">05</span>Servicios</button>
+        <button type="button" data-section="blocks" data-admin-only><span class="admin-nav__icon">06</span>Bloqueos</button>
+        <button type="button" data-section="settings" data-admin-only><span class="admin-nav__icon">07</span>Configuración</button>
+        <button type="button" data-section="users" data-admin-only><span class="admin-nav__icon">08</span>Usuarios</button>
+      </nav>
+
+      <div class="admin-sidebar__foot">
+        <span id="sidebar-user">Cargando…</span>
+        <a class="text-link" href="/" target="_blank" rel="noopener noreferrer">Ver sitio público</a>
+        <button type="button" class="btn btn--ghost btn--small" id="change-password-button">Cambiar contraseña</button>
+        <button type="button" class="btn btn--ghost btn--small" id="logout-button">Cerrar sesión</button>
+      </div>
+    </aside>
+
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <div class="admin-topbar__title">
+          <strong id="topbar-title">Resumen</strong>
+          <small id="topbar-subtitle">Cargando…</small>
+        </div>
+        <div class="admin-topbar__actions">
+          <button type="button" class="icon-btn" id="admin-menu" aria-label="Abrir menú">Menú</button>
+          <div class="admin-user">
+            <span class="admin-user__avatar" id="user-avatar">DF</span>
+            <span id="topbar-user">—</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="admin-content">
+        <section class="admin-section is-active" data-section-panel="dashboard">
+          <div class="admin-section__head">
+            <div>
+              <p class="eyebrow">Resumen</p>
+              <h1>Hoy en la barbería</h1>
+              <p id="dashboard-date">—</p>
+            </div>
+            <div class="admin-actions">
+              <button type="button" class="btn btn--ghost btn--small" id="dashboard-refresh">Actualizar</button>
+            </div>
+          </div>
+          <div class="stat-grid" id="dashboard-stats"></div>
+          <div class="panel">
+            <div class="panel__head"><h2>Citas de hoy</h2><span class="badge" id="dashboard-today-count">0</span></div>
+            <div class="table-wrap" id="dashboard-today"></div>
+          </div>
+          <div class="panel">
+            <div class="panel__head"><h2>Próximas citas</h2></div>
+            <div class="table-wrap" id="dashboard-upcoming"></div>
+          </div>
+        </section>
+
+        <section class="admin-section" data-section-panel="appointments">
+          <div class="admin-section__head">
+            <div>
+              <p class="eyebrow">Agenda</p>
+              <h1>Citas</h1>
+              <p>Filtra, revisa y actualiza el estado de cada reserva.</p>
+            </div>
+            <div class="admin-actions">
+              <a class="btn btn--ghost btn--small" id="appointments-export" href="/api/admin/appointments/export">Exportar CSV</a>
+              <button type="button" class="btn btn--small" id="appointment-new" data-admin-only>Nueva cita</button>
+            </div>
+          </div>
+
+          <form class="filters" id="appointments-filters">
+            <label class="field"><span>Desde</span><input type="date" name="date_from"></label>
+            <label class="field"><span>Hasta</span><input type="date" name="date_to"></label>
+            <label class="field">
+              <span>Estado</span>
+              <select name="status">
+                <option value="">Todos</option>
+                <option value="confirmed">Confirmada</option>
+                <option value="completed">Completada</option>
+                <option value="cancelled">Cancelada</option>
+                <option value="no_show">No asistió</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Pago</span>
+              <select name="payment_status">
+                <option value="">Todos</option>
+                <option value="pending">Pendiente</option>
+                <option value="paid">Pagado</option>
+              </select>
+            </label>
+            <label class="field" data-admin-only><span>Barbero</span><select name="barber_id" id="appointments-barber-filter"><option value="">Todos</option></select></label>
+            <label class="field"><span>Buscar</span><input type="search" name="search" maxlength="100" placeholder="Código, nombre o teléfono"></label>
+            <button type="submit" class="btn btn--small">Aplicar filtros</button>
+            <button type="button" class="btn btn--ghost btn--small" id="appointments-clear">Limpiar</button>
+          </form>
+
+          <div class="panel">
+            <div class="table-wrap" id="appointments-table"></div>
+          </div>
+        </section>
+
+        <section class="admin-section" data-section-panel="calendar">
+          <div class="admin-section__head">
+            <div>
+              <p class="eyebrow">Agenda visual</p>
+              <h1>Calendario</h1>
+              <p>Citas y bloqueos del periodo seleccionado.</p>
+            </div>
+          </div>
+          <div class="admin-calendar__toolbar">
+            <div class="admin-calendar__nav">
+              <button type="button" class="icon-btn" id="calendar-prev" aria-label="Periodo anterior">←</button>
+              <strong id="admin-calendar-month">—</strong>
+              <button type="button" class="icon-btn" id="calendar-next" aria-label="Periodo siguiente">→</button>
+            </div>
+            <div class="admin-actions">
+              <div class="admin-calendar__views" role="group" aria-label="Vista del calendario">
+                <button type="button" class="btn btn--ghost btn--small" data-calendar-view="day">Día</button>
+                <button type="button" class="btn btn--ghost btn--small" data-calendar-view="week">Semana</button>
+                <button type="button" class="btn btn--ghost btn--small is-active" data-calendar-view="month">Mes</button>
+              </div>
+              <label class="field" data-admin-only><span>Barbero</span><select id="calendar-barber-filter"><option value="">Todos</option></select></label>
+              <button type="button" class="btn btn--ghost btn--small" id="calendar-refresh">Actualizar</button>
+            </div>
+          </div>
+          <div class="admin-calendar__grid" id="admin-calendar-grid"></div>
+        </section>
+
+        <section class="admin-section" data-section-panel="barbers" data-admin-only>
+          <div class="admin-section__head">
+            <div>
+              <p class="eyebrow">Equipo</p>
+              <h1>Barberos</h1>
+              <p>Gestiona el equipo, sus servicios y horarios.</p>
+            </div>
+            <div class="admin-actions">
+              <button type="button" class="btn btn--small" id="barber-new">Nuevo barbero</button>
+            </div>
+          </div>
+          <div class="card-grid" id="barbers-list"></div>
+        </section>
+
+        <section class="admin-section" data-section-panel="services" data-admin-only>
+          <div class="admin-section__head">
+            <div>
+              <p class="eyebrow">Catálogo</p>
+              <h1>Servicios</h1>
+              <p>Precios, duración y disponibilidad de cada servicio.</p>
+            </div>
+            <div class="admin-actions">
+              <button type="button" class="btn btn--small" id="service-new">Nuevo servicio</button>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="table-wrap" id="services-table"></div>
+          </div>
+        </section>
+
+        <section class="admin-section" data-section-panel="blocks" data-admin-only>
+          <div class="admin-section__head">
+            <div>
+              <p class="eyebrow">Disponibilidad</p>
+              <h1>Bloqueos</h1>
+              <p>Bloquea vacaciones, pausas o compromisos del equipo.</p>
+            </div>
+            <div class="admin-actions">
+              <button type="button" class="btn btn--small" id="block-new">Nuevo bloqueo</button>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="table-wrap" id="blocks-table"></div>
+          </div>
+        </section>
+
+        <section class="admin-section" data-section-panel="settings" data-admin-only>
+          <div class="admin-section__head">
+            <div>
+              <p class="eyebrow">Configuración</p>
+              <h1>Datos del negocio</h1>
+              <p>Textos, diseño, horarios, pagos y reglas de reserva.</p>
+            </div>
+            <div class="admin-actions">
+              <button type="button" class="btn btn--small" id="settings-save">Guardar cambios</button>
+            </div>
+          </div>
+          <div class="settings-groups" id="settings-groups"></div>
+        </section>
+
+        <section class="admin-section" data-section-panel="users" data-admin-only>
+          <div class="admin-section__head">
+            <div>
+              <p class="eyebrow">Accesos</p>
+              <h1>Usuarios</h1>
+              <p>Administradores y barberos con acceso al panel.</p>
+            </div>
+            <div class="admin-actions">
+              <button type="button" class="btn btn--small" id="user-new">Nuevo usuario</button>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="table-wrap" id="users-table"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal__dialog" id="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal__head">
+        <h2 id="modal-title">Detalle</h2>
+        <button type="button" class="modal-close" id="modal-close" aria-label="Cerrar">×</button>
+      </div>
+      <div class="modal__body" id="modal-body"></div>
+      <div class="modal__foot" id="modal-foot"></div>
+    </div>
+  </div>
+
+  <script src="/js/api.js" defer></script>
+  <script src="/js/admin.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reservar cita | Barbería Don Filo</title>
+  <meta name="description" content="Reserva tu cita online en Barbería Don Filo. Elige servicio, barbero, fecha y hora en pocos pasos.">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="page-shell">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <header class="page-header">
+    <div class="container page-header__inner">
+      <a class="brand" href="/" aria-label="Barbería Don Filo">
+        <span class="brand__mark">DF</span>
+        <span class="brand__text">
+          <strong>Barbería Don Filo</strong>
+          <small>Reserva online</small>
+        </span>
+      </a>
+      <nav class="page-header__links" aria-label="Enlaces rápidos">
+        <a href="/consulta">Consultar mi cita</a>
+        <a class="btn btn--ghost btn--small" href="/">Volver al inicio</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-main" id="main">
+    <div class="container booking-layout">
+      <aside class="booking-sidebar">
+        <p class="eyebrow">Agenda 24/7</p>
+        <h1>Tu próxima cita, en pocos pasos</h1>
+        <p>Elige servicio, barbero y hora. La confirmación es inmediata y recibirás un código para consultar o cancelar.</p>
+
+        <ol class="progress-list" id="booking-progress">
+          <li data-progress="1" class="is-active"><span>Servicio</span></li>
+          <li data-progress="2"><span>Barbero</span></li>
+          <li data-progress="3"><span>Fecha y hora</span></li>
+          <li data-progress="4"><span>Tus datos</span></li>
+        </ol>
+
+        <div class="summary" id="booking-summary" aria-live="polite">
+          <div class="summary__row"><span>Servicio</span><strong>Sin elegir</strong></div>
+          <div class="summary__row"><span>Barbero</span><strong>Sin elegir</strong></div>
+          <div class="summary__row"><span>Fecha</span><strong>Sin elegir</strong></div>
+          <div class="summary__row"><span>Hora</span><strong>Sin elegir</strong></div>
+          <div class="summary__row"><span>Total</span><strong>—</strong></div>
+        </div>
+
+        <p class="section-note" id="booking-terms">Puedes cancelar sin costo hasta 2 horas antes de la cita.</p>
+      </aside>
+
+      <section class="booking-main">
+        <div class="booking-card">
+          <div class="booking-card__head">
+            <div>
+              <p class="eyebrow" id="step-eyebrow">Paso 1 de 4</p>
+              <h2 id="step-title">Elige tu servicio</h2>
+              <p id="step-subtitle">Selecciona el servicio que quieres recibir.</p>
+            </div>
+          </div>
+
+          <div class="booking-loading" id="booking-loading">
+            <span class="spinner" aria-hidden="true"></span>
+            <span>Cargando servicios…</span>
+          </div>
+          <div class="form__error" id="booking-error" role="alert" hidden></div>
+
+          <form id="booking-form" class="form" novalidate>
+            <div class="step is-active" data-step="1">
+              <div class="choice-grid" id="service-choices"></div>
+            </div>
+
+            <div class="step" data-step="2">
+              <div class="choice-grid" id="barber-choices"></div>
+              <div class="booking-actions">
+                <button type="button" class="btn btn--ghost" data-back="1">← Cambiar servicio</button>
+                <span></span>
+              </div>
+            </div>
+
+            <div class="step" data-step="3">
+              <div class="calendar">
+                <div class="calendar__head">
+                  <button type="button" class="icon-btn" id="calendar-prev" aria-label="Mes anterior">←</button>
+                  <strong id="calendar-month">Mes</strong>
+                  <button type="button" class="icon-btn" id="calendar-next" aria-label="Mes siguiente">→</button>
+                </div>
+                <div class="calendar__grid" id="calendar-grid"></div>
+              </div>
+
+              <div id="time-section" hidden>
+                <p class="eyebrow" style="margin-top:1.4rem">Horas disponibles</p>
+                <p id="selected-date-label" class="section-note"></p>
+                <div class="time-grid" id="time-grid"></div>
+                <p class="empty-state" id="time-empty" hidden>No quedan horas disponibles para este día. Prueba otra fecha.</p>
+              </div>
+
+              <div class="booking-actions">
+                <button type="button" class="btn btn--ghost" data-back="2">← Cambiar barbero</button>
+                <div class="booking-actions__right">
+                  <button type="button" class="btn" id="to-step-4" disabled>Continuar</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="step" data-step="4">
+              <div class="field-row">
+                <label class="field">
+                  <span>Nombre completo</span>
+                  <input type="text" name="customer_name" autocomplete="name" required minlength="2" maxlength="100">
+                </label>
+                <label class="field">
+                  <span>Teléfono (10 dígitos)</span>
+                  <input type="tel" name="customer_phone" autocomplete="tel" inputmode="numeric" required minlength="10" maxlength="10" placeholder="3001234567">
+                </label>
+              </div>
+              <label class="field">
+                <span>Email (opcional)</span>
+                <input type="email" name="customer_email" autocomplete="email" maxlength="150">
+              </label>
+              <label class="field">
+                <span>Notas para el barbero (opcional)</span>
+                <textarea name="notes" rows="3" maxlength="500" placeholder="Ejemplo: degradado bajo, barba perfilada…"></textarea>
+              </label>
+
+              <div class="field">
+                <span>Método de pago</span>
+                <div class="payment-options" id="payment-options"></div>
+              </div>
+              <div class="transfer-box" id="transfer-box" hidden></div>
+
+              <div class="summary" id="confirm-summary" aria-live="polite"></div>
+
+              <div class="booking-actions">
+                <button type="button" class="btn btn--ghost" data-back="3">← Cambiar hora</button>
+                <div class="booking-actions__right">
+                  <button type="submit" class="btn btn--large" id="booking-submit">Confirmar cita</button>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <div class="success-panel" id="booking-success" hidden>
+            <div class="success-panel__mark" aria-hidden="true">✓</div>
+            <h1>¡Cita confirmada!</h1>
+            <p id="success-message">Tu cita quedó registrada. Guarda tu código para consultarla o cancelarla.</p>
+            <div class="booking-code" id="success-code">—</div>
+            <div class="summary" id="success-details"></div>
+            <div class="success-actions">
+              <a class="btn" id="success-consulta" href="/consulta">Consultar mi cita</a>
+              <button class="btn btn--ghost" type="button" id="success-new">Reservar otra cita</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="/js/api.js" defer></script>
+  <script src="/js/booking.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <defs>
+    <linearGradient id="g5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1b1b1b"/>
+      <stop offset="1" stop-color="#31291b"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#g5)"/>
+  <path d="M160 430c40-120 120-210 260-250" fill="none" stroke="#c9a227" stroke-width="12" stroke-linecap="round"/>
+  <path d="M190 470c70-90 140-150 240-180" fill="none" stroke="#f3ead7" stroke-width="4" stroke-linecap="round" opacity=".7"/>
+  <path d="M380 160h70v70" fill="none" stroke="#f3ead7" stroke-width="8"/>
+  <text x="300" y="555" text-anchor="middle" font-family="Georgia, serif" font-size="30" letter-spacing="6" fill="#c9a227">RAYA</text>
+</svg>

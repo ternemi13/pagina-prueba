@@ -1,0 +1,40 @@
+{
+  "name": "barberia-don-filo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sistema web reutilizable para barberias con agendamiento de citas y panel de administracion.",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "db:init": "node scripts/init-db.js",
+    "db:seed": "node scripts/seed.js",
+    "db:reset": "node scripts/reset-db.js",
+    "admin:create": "node scripts/create-admin.js",
+    "test": "node --test --test-concurrency=1 \"tests/**/*.test.js\"",
+    "test:concurrency": "node scripts/test-concurrency.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "csrf-csrf": "^4.1.0",
+    "dayjs": "^1.11.13",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-mysql-session": "^3.0.3",
+    "express-rate-limit": "^7.5.0",
+    "express-session": "^1.18.1",
+    "helmet": "^8.0.0",
+    "mysql2": "^3.24.6",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "supertest": "^7.0.0"
+  },
+  "overrides": {
+    "mysql2": "^3.24.6"
+  }
+}

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="og" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101010"/>
+      <stop offset="0.55" stop-color="#1d1a13"/>
+      <stop offset="1" stop-color="#0b0b0b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#og)"/>
+  <circle cx="980" cy="120" r="300" fill="#c9a227" opacity=".08"/>
+  <rect x="80" y="80" width="1040" height="470" rx="24" fill="none" stroke="#c9a227" stroke-width="2" opacity=".45"/>
+  <text x="120" y="240" font-family="Georgia, serif" font-size="76" fill="#f3ead7">Barbería Don Filo</text>
+  <text x="124" y="305" font-family="Arial, sans-serif" font-size="30" fill="#c9a227" letter-spacing="4">CORTES CON CARÁCTER</text>
+  <text x="124" y="385" font-family="Arial, sans-serif" font-size="28" fill="#b9b3a7">Reserva online 24/7 en Bogotá</text>
+  <rect x="124" y="430" width="250" height="64" rx="32" fill="#c9a227"/>
+  <text x="249" y="472" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#15120a">Reservar cita</text>
+</svg>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Consultar mi cita | Barbería Don Filo</title>
+  <meta name="description" content="Consulta, revisa o cancela tu cita en Barbería Don Filo con tu código de reserva y teléfono.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="page-shell">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <header class="page-header">
+    <div class="container page-header__inner">
+      <a class="brand" href="/" aria-label="Barbería Don Filo">
+        <span class="brand__mark">DF</span>
+        <span class="brand__text">
+          <strong>Barbería Don Filo</strong>
+          <small>Mi cita</small>
+        </span>
+      </a>
+      <nav class="page-header__links" aria-label="Enlaces rápidos">
+        <a href="/reservar">Reservar cita</a>
+        <a class="btn btn--ghost btn--small" href="/">Volver al inicio</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-main" id="main">
+    <div class="container lookup-layout">
+      <section class="lookup-card">
+        <p class="eyebrow">Consulta segura</p>
+        <h1>Encuentra tu cita</h1>
+        <p>Ingresa el código de reserva y el teléfono con el que agendaste. Así protegemos tus datos.</p>
+
+        <form id="lookup-form" class="form" novalidate>
+          <div class="form__error" id="lookup-error" role="alert" hidden></div>
+          <label class="field">
+            <span>Código de reserva</span>
+            <input type="text" name="code" autocomplete="off" required placeholder="DF-XXXXX" maxlength="20">
+          </label>
+          <label class="field">
+            <span>Teléfono (10 dígitos)</span>
+            <input type="tel" name="phone" autocomplete="tel" inputmode="numeric" required minlength="10" maxlength="10" placeholder="3001234567">
+          </label>
+          <button class="btn btn--large btn--block" type="submit" id="lookup-submit">Buscar mi cita</button>
+        </form>
+
+        <p class="section-note">¿No tienes tu código? Escríbenos por WhatsApp y te ayudamos a encontrarla.</p>
+      </section>
+
+      <section>
+        <div class="lookup-card" id="lookup-empty">
+          <p class="eyebrow">Tu agenda</p>
+          <h2>Tu cita, siempre a mano</h2>
+          <p>Consulta la fecha, el barbero y el estado de tu reserva. Si aún puedes cancelar, también puedes hacerlo desde aquí.</p>
+          <div class="callout">
+            <strong>Consejo</strong>
+            <p>Guarda tu código de reserva. Lo necesitarás si quieres consultar o cancelar tu cita más adelante.</p>
+          </div>
+        </div>
+
+        <div class="detail-card" id="lookup-result" hidden>
+          <div class="detail-card__head">
+            <div>
+              <p class="eyebrow">Reserva</p>
+              <h2 id="result-code">—</h2>
+            </div>
+            <span class="badge" id="result-status">—</span>
+          </div>
+          <div class="detail-card__body" id="result-body"></div>
+          <div class="detail-actions" id="result-actions">
+            <button class="btn btn--danger" type="button" id="cancel-toggle" hidden>Cancelar cita</button>
+            <a class="btn btn--ghost" href="/reservar">Reservar otra cita</a>
+          </div>
+          <form id="cancel-form" class="form" hidden>
+            <div class="form__error" id="cancel-error" role="alert" hidden></div>
+            <label class="field">
+              <span>Motivo de cancelación (opcional)</span>
+              <textarea name="reason" rows="3" maxlength="255" placeholder="Cuéntanos brevemente por qué cancelas."></textarea>
+            </label>
+            <div class="detail-actions">
+              <button class="btn btn--danger" type="submit" id="cancel-submit">Confirmar cancelación</button>
+              <button class="btn btn--ghost" type="button" id="cancel-close">Volver</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="/js/api.js" defer></script>
+  <script src="/js/lookup.js" defer></script>
+</body>
+</html>
